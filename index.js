@@ -12,9 +12,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/', function (req, res) {
-  res.render('index', {
-    title: 'Tourism Management System'
-  });
+  res.render('index');
+});
+
+app.get('/login', function (req, res) {
+  res.render('login');
 });
 
 app.listen(3000, function (err) {
