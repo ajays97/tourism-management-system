@@ -19,6 +19,10 @@ app.get('/login', function (req, res) {
   res.render('login');
 });
 
+app.post('/login', function (req, res) {
+  // Check for correct credentials
+});
+
 app.listen(3000, function (err) {
   if (err) throw err;
   console.log("Magic happens on port 3000...");
