@@ -18,7 +18,7 @@
         }
 
         /* Full-width inputs */
-        input[type=email], input[type=password] {
+        input[type=email], input[type=password], input[type=text] {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -86,28 +86,34 @@
     </style>
 
 </head>
-    <body>
+<body>
 
-    <form action="/login" method="post">
-        <div class="imgcontainer">
-            <img src="img_avatar2.png" alt="Log in to use TMS" class="avatar">
-        </div>
+<form action="/login" method="post">
+    <div class="imgcontainer">
+        <img src="img_avatar2.png" alt="Log in to use TMS" class="avatar">
+    </div>
 
-        <div class="container">
-            <label><b>Email ID</b></label>
-            <input type="email" placeholder="Email" name="email" required>
+    <div class="container">
+        <label><b>First Name</b></label>
+        <input type="text" placeholder="First Name" name="fname" required>
 
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+        <label><b>Last Name</b></label>
+        <input type="text" placeholder="Last Name" name="lname" required>
 
-            <button type="submit">Login</button>
+        <label><b>Email ID</b></label>
+        <input type="email" placeholder="Email" name="email" required>
 
-        </div>
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
 
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn" onclick="location.href='/'">Cancel</button>
-        </div>
-    </form>
+        <button type="submit">Login</button>
 
-    </body>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn" onclick="location.href='/'">Cancel</button>
+    </div>
+</form>
+
+</body>
 </html>
