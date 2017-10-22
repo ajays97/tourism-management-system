@@ -85,8 +85,16 @@
         }
     </style>
 
+
+
 </head>
     <body>
+
+    {{#if error}}
+        <script>
+            alert('Invalid Credentials');
+        </script>
+    {{/if}}
 
     <form action="/login" method="post">
         <div class="imgcontainer">
