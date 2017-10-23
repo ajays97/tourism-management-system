@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const conn = require('./dbconnect');
+const url = require('url');
 
 var app = express();
 
@@ -24,17 +25,25 @@ app.get('/signup', function (req, res) {
     res.render('signup');
 });
 
+app.get('/home', function (req, res) {
+    console.log(req.query.username);
+    res.render('home', {username: req.query.username});
+});
 
 app.post('/login', function (req, res) {
     // Check for correct credentials
     email = req.body.email;
     password = req.body.psw;
-    var query = "SELECT password from users where email = ?";
+    var query = "SELECT password, username from users where email = ?";
     conn.query(query, [email], function (err, result) {
         if (err) throw err;
-        if (password === result[0].password) res.redirect('/signup');
+        if (password === result[0].password) res.redirect(url.format({
+            pathname: "/home",
+            query: {
+                "username": result[0].username
+            }
+        }));
         else res.redirect('/login');
-
     });
 });
 
