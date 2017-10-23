@@ -2,8 +2,6 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const conn = require('./dbconnect');
-const flash = require('connect-flash');
-const session = require('express-session');
 
 var app = express();
 
@@ -13,8 +11,6 @@ app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(flash());
-app.use(session({secret: 'tms'}));
 
 app.get('/', function (req, res) {
     res.render('index');
@@ -36,9 +32,8 @@ app.post('/login', function (req, res) {
     var query = "SELECT password from users where email = ?";
     conn.query(query, [email], function (err, result) {
         if (err) throw err;
-        console.log(result.RowDataPacket);
-        if (result = []) res.render('login', {error: "true"});
-        else res.render('signup');
+        if (password === result[0].password) res.redirect('/signup');
+        else res.redirect('/login');
 
     });
 });
