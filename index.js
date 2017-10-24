@@ -73,6 +73,30 @@ app.post('/signup', function (req, res) {
     });
 });
 
+app.get('/book/:id', function (req, res) {
+    res.render('booking', {id: req.params.id});
+
+});
+
+app.post('/:id/payment', function (req, res) {
+    res.render('payment_processing');
+    console.log(req.body);
+    var usernameQuery = "SELECT username, fname from users WHERE email = '" + req.body.email + "';";
+    console.log(usernameQuery);
+    conn.query(usernameQuery, function (err, results, fields) {
+        console.log(results[0].username);
+        var booking = "INSERT INTO bookings SET ?";
+        conn.query(booking, {bid: null, username: results[0].username, pid: req.params.id, bdate: new Date().toLocaleDateString(), price: req.body.amount}, function (err, result) {
+            if (err) throw err;
+            console.log(result);
+        });
+    });
+});
+
+app.get('/feedback', function (req, res) {
+    res.render('feedback');
+});
+
 app.listen(3000, function (err) {
     if (err) throw err;
     console.log("Magic happens on port 3000...");

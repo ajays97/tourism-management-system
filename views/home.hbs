@@ -45,16 +45,16 @@
                 <div class="item  col-xs-6 col-lg-6">
                     <div class="caption">
                         <h4 class="group inner list-group-item-heading">
-                            {{pname}}</h4>
+                            {{pid}}. {{pname}}</h4>
                         <p class="group inner list-group-item-text">
                             {{description}}</p>
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <p class="lead">
-                                    {{price}}</p>
+                                    Rs. {{price}}/-</p>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <a class="btn btn-success" href="#">Book Package</a>
+                                <a class="btn btn-success" id="{{pid}}" href="/book/{{pid}}">Book Package</a>
                             </div>
                         </div>
                     </div>
