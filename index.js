@@ -93,10 +93,6 @@ app.post('/:id/payment', function (req, res) {
     });
 });
 
-app.get('/feedback', function (req, res) {
-    res.render('feedback');
-});
-
 app.listen(3000, function (err) {
     if (err) throw err;
     console.log("Magic happens on port 3000...");
