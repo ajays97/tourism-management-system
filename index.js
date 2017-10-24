@@ -27,7 +27,24 @@ app.get('/signup', function (req, res) {
 
 app.get('/home', function (req, res) {
     console.log(req.query.username);
-    res.render('home', {username: req.query.username});
+    var query = "SELECT * from packages;";
+    conn.query(query, function (err, results, fields) {
+        if (err) throw err;
+        var packages = [];
+        for (var i = 0; i < results.length; i++) {
+            packages.push({
+                pname: results[i].pname,
+                description: results[i].description,
+                pid: results[i].pid,
+                price: results[i].price
+            });
+        }
+        for (i = 0; i < packages.length; i++) {
+            console.log(packages[i].pname);
+        }
+
+        res.render('home', {username: req.query.username, packages: packages});
+    });
 });
 
 app.post('/login', function (req, res) {

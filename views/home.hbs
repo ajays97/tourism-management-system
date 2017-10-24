@@ -12,20 +12,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-    <style>
-        html {
-            background: url(/img/hero.jpg) no-repeat center center fixed;
-            -webkit-background-size: cover;
-            background-size: cover;
-        }
-    </style>
-
     <script>
         function resetState () {
             var stateObj = {foo: "bar"};
             history.pushState(stateObj, "page 2", "login");
         }
     </script>
+
+    <style>
+        h2 {
+            margin-left: 2em;
+        }
+    </style>
 </head>
     <body>
         <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
@@ -39,5 +37,30 @@
             </div>
         </nav>
 
+        <h2>Select your package</h2>
+
+        {{#each packages}}
+        <div class="container" style="margin-top: 2.5em;">
+            <div id="products" class="row list-group">
+                <div class="item  col-xs-6 col-lg-6">
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">
+                            {{pname}}</h4>
+                        <p class="group inner list-group-item-text">
+                            {{description}}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    {{price}}</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <a class="btn btn-success" href="#">Book Package</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
     </body>
 </html>
