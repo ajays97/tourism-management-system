@@ -47,6 +47,24 @@ app.get('/home', function (req, res) {
     });
 });
 
+app.post('/feedback/:username', function (req, res) {
+    var feedback = req.body.feedback;
+    var username = req.params.username;
+    var query = "INSERT INTO feedbacks SET ?";
+    conn.query(query, {username: username, feedback: feedback}, function (err, result) {
+        if (err) throw err;
+        console.log(result);
+
+        res.redirect(url.format({
+            pathname: "/home",
+            query: {
+                "username": username
+            }
+        }));
+    });
+
+});
+
 app.post('/login', function (req, res) {
     // Check for correct credentials
     email = req.body.email;
