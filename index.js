@@ -26,7 +26,6 @@ app.get('/signup', function (req, res) {
 });
 
 app.get('/home', function (req, res) {
-    console.log(req.query.username);
     var query = "SELECT * from packages;";
     conn.query(query, function (err, results, fields) {
         if (err) throw err;
@@ -39,10 +38,6 @@ app.get('/home', function (req, res) {
                 price: results[i].price
             });
         }
-        for (i = 0; i < packages.length; i++) {
-            console.log(packages[i].pname);
-        }
-
         res.render('home', {username: req.query.username, packages: packages});
     });
 });
@@ -53,8 +48,6 @@ app.post('/feedback/:username', function (req, res) {
     var query = "INSERT INTO feedbacks SET ?";
     conn.query(query, {username: username, feedback: feedback}, function (err, result) {
         if (err) throw err;
-        console.log(result);
-
         res.redirect(url.format({
             pathname: "/home",
             query: {
@@ -86,8 +79,7 @@ app.post('/signup', function (req, res) {
     user = req.body;
     var insert = 'INSERT INTO users SET ?';
     conn.query(insert, {fname: user.fname, lname: user.lname, username: user.uname, email: user.email, password: user.psw}, function (err, result) {
-        if (err) throw err;
-        console.log(result);
+        res.redirect('/login');
     });
 });
 
@@ -98,15 +90,11 @@ app.get('/book/:id', function (req, res) {
 
 app.post('/:id/payment', function (req, res) {
     res.render('payment_processing');
-    console.log(req.body);
     var usernameQuery = "SELECT username, fname from users WHERE email = '" + req.body.email + "';";
-    console.log(usernameQuery);
     conn.query(usernameQuery, function (err, results, fields) {
-        console.log(results[0].username);
         var booking = "INSERT INTO bookings SET ?";
         conn.query(booking, {bid: null, username: results[0].username, pid: req.params.id, bdate: new Date().toLocaleDateString(), price: req.body.amount}, function (err, result) {
             if (err) throw err;
-            console.log(result);
         });
     });
 });
